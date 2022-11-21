@@ -12,7 +12,7 @@ const CountDown = ({duration, setCountDown}: {duration: number, setCountDown: (v
                 return { shouldRepeat: false, delay: 1.5 } // repeat animation in 1.5 seconds
             }}
             >
-            {({ remainingTime }) => <p style={{color: "white"}}>{remainingTime}</p>}
+            {({ remainingTime }) => <p style={{color: "white", fontSize: "3rem"}}>{remainingTime}</p>}
             </CountdownCircleTimer>
         </div>
     );

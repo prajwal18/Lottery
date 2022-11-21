@@ -1,5 +1,0 @@
-const getWinningNumber = () => {
-
-}
-
-export {getWinningNumber};

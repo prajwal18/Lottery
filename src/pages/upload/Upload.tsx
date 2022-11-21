@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import chicken from '../../assets/images/chicken.jpg';
+//Delete After
+import { data, getMobileArrayData, getWinningNumber } from "./Util";
+//Delete After
 
 //Styled Componenet
 const Container = styled.div`
@@ -10,6 +16,8 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     background: linear-gradient(to right, #3489eb, #4fb2e8);
+    background-image:url(${chicken});
+    background-size:cover;
     color: rgba(255,255,255,0.6);
 `;
 const Title = styled.h1`
@@ -40,47 +48,95 @@ const CustBtn = styled.button`
         background: #46aae8;
     }
 `;
+const CustLink = styled(Link)`
+    color: #9ae9f5 !important;
+    &:active {
+        color: #f53a33 !important;
+    }
+`;
+const CustForm = styled.form`
+    display: flex; gap: 20px;
+    margin-top: 50px; align-items:center;
+    justify-content: center;
+`;
+const CustInput = styled.input`
+    display: block; 
+    padding: 10px;
+    color: rgba(255,255,255, 0.6);
+    font-size: 1.1rem;
+    width: 300px;
+`;
+const UploadBtn = styled.button`
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+`;
 //Styled Componenet
-type UploadNProceedPropType = {
-    title: string,
-    subTitle?: string,
-    btnName: string,
-    callback: () => void;
-}
-
-const UploadNProceed = ({title, subTitle, btnName, callback}: UploadNProceedPropType) => {
-    return(
-        <Container>
-            <Title>{title}</Title>
-            <p>{subTitle}</p>
-            <CustBtn onClick={callback}>{btnName}</CustBtn>
-        </Container>
-    );
-}
 
 const Upload = () => {
-    const handleUpload = () => {};
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
+    const handleUpload = () => {
+        let mobileData = getMobileArrayData(data);
+        navigate("/lottery-start", {state: {allowAccess: true, mobileData}});
+    };
+    const location = useLocation();
     return(
-        <UploadNProceed
-            title="Upload your document"
-            subTitle="Valley cold store | Providing excellent service for 41+ years"
-            btnName="Upload"
-            callback={handleUpload}
-        />
+        <>
+            {
+                location.state && location.state.allowAccess?
+                <Container>
+                    <Title>Upload your Excel File</Title>
+                    <p>Valley cold store | Providing excellent service for 41+ years</p>
 
+                    <CustForm onSubmit={handleUpload}>
+                        <CustInput type="file" required accept=".xls,.xlsx"/>
+                        <UploadBtn type="submit">Upload</UploadBtn>
+                    </CustForm>
+                    {
+                        error &&
+                        <p style={{color: "red", fontSize: "2rem"}}>Sorry, can't read exel file</p>
+                    }
+                </Container>  
+                :
+                <GoBackToHome/>
+            }
+        </>
+        
     );
 }
 const Proceed = () => {
-    const handleProceed = () => {};
+    const navigate = useNavigate();
+    const location = useLocation();
+    const handleProceed = () => {
+        console.log(location);
+        const winningNumber = getWinningNumber(location.state.mobileData);
+        navigate("/lottery", {state: {allowAccess: true, winningNumber: winningNumber}})
+    };
     return(
-        <UploadNProceed
-            title="Start the lottery"
-            subTitle="Click the button to start the lottery."
-            btnName="start"
-            callback={handleProceed}
-        />
-
+        <>
+            {
+                location.state && location.state.allowAccess?
+                <Container>
+                    <Title>Start the lottery</Title>
+                    <p>Click the button to start the lottery.</p>
+                    <CustBtn onClick={handleProceed}>start</CustBtn>
+                </Container>  
+                :
+                <GoBackToHome/>
+            }
+        </>
+        
     );
+}
+
+export const GoBackToHome = () => {
+    return(
+        <Container style={{justifyContent:"flex-start", paddingTop: "100px"}}>
+            <p style={{color: "white"}}>Sorry You can't acces this page.</p>
+            <CustLink to="/">Go back to Home</CustLink>
+        </Container>
+    )
 }
 
 export {Upload, Proceed};
