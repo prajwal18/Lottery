@@ -1,0 +1,5 @@
+const getWinningNumber = () => {
+
+}
+
+export {getWinningNumber};
