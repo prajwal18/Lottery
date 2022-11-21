@@ -4,3 +4,4 @@ declare module "*.png";
 declare module "styled-components";
 declare module "react-odometerjs";
 declare module "react-icons";
+declare module "xlsx";

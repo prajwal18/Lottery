@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import chicken from '../../assets/images/chicken.jpg';
 //Delete After
-import { data, getMobileArrayData, getWinningNumber } from "./Util";
+import { getMobileArrayData, getWinningNumber, readUploadFile } from "./Util";
 //Delete After
 
 //Styled Componenet
@@ -75,11 +75,17 @@ const UploadBtn = styled.button`
 
 const Upload = () => {
     const [error, setError] = useState(false);
+    const [mobileData, setMobileData] = useState<Array<{phone: string}>>([]);
     const navigate = useNavigate();
+
     const handleUpload = () => {
-        let mobileData = getMobileArrayData(data);
-        navigate("/lottery-start", {state: {allowAccess: true, mobileData}});
+        let finalData = getMobileArrayData(mobileData);
+        navigate("/lottery-start", {state: {allowAccess: true, mobileData: finalData}});
     };
+
+    const handleExelFileUpload = (e:any) => {
+        readUploadFile(e, setError, setMobileData);
+    }
     const location = useLocation();
     return(
         <>
@@ -90,7 +96,7 @@ const Upload = () => {
                     <p>Valley cold store | Providing excellent service for 41+ years</p>
 
                     <CustForm onSubmit={handleUpload}>
-                        <CustInput type="file" required accept=".xls,.xlsx"/>
+                        <CustInput type="file" onChange={handleExelFileUpload} required accept=".xls,.xlsx"/>
                         <UploadBtn type="submit">Upload</UploadBtn>
                     </CustForm>
                     {
@@ -109,7 +115,6 @@ const Proceed = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const handleProceed = () => {
-        console.log(location);
         const winningNumber = getWinningNumber(location.state.mobileData);
         navigate("/lottery", {state: {allowAccess: true, winningNumber: winningNumber}})
     };
