@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import Lottie from "lottie-react";
-import Celebrate from "../../assets/celebrate.json";
 import styled from "styled-components";
 import CountDown from '../../components/Counter';
 import { useLocation } from 'react-router-dom'
 import OdometerContainer from '../../components/OdometerContainer';
 import { GoBackToHome } from '../upload/Upload';
+import Celebrate from "../../assets/celebrate.json";
+import Firework from "../../assets/firework.json";
 
 //Styled component
 const Winner = styled.h1`
@@ -23,6 +24,7 @@ function Lottery() {
   const [values, setValues] = useState<Array<number>>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [desiredNum, setDesiredNum] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [show, setShow] = useState(false);
+  const [showFirework, setShowFirework] = useState(false);
   const [countDown, setCountDown] = useState(true);
 
   const generateWinner = async () => {
@@ -39,13 +41,16 @@ function Lottery() {
       }
       setTimeout(() => {
         setShow(true);
+        setTimeout(() => {
+          setShowFirework(true);
+        }, 2000)
       }, 10000)
     }
   }
 
   useEffect(() => {
-    if(location.state && location.state.allowAccess){
-      setDesiredNum(location.state.winningNumber); 
+    if (location.state && location.state.allowAccess) {
+      setDesiredNum(location.state.winningNumber);
     }
     if (!countDown) {
       generateWinner();
@@ -55,33 +60,34 @@ function Lottery() {
 
   const location = useLocation();
 
-  if(!(location.state && location.state.allowAccess)){
-    return(
-      <GoBackToHome/>
+  if (!(location.state && location.state.allowAccess)) {
+    return (
+      <GoBackToHome />
     )
   }
 
   return (
-      <div className="App">
-        <div className='container'>
-          <>
-            {countDown ?
+    <div className="App">
+      <div className='container'>
+        <>
+          {countDown ?
 
-              <CountDown
-                duration={10}
-                setCountDown={setCountDown}
-              />
+            <CountDown
+              duration={10}
+              setCountDown={setCountDown}
+            />
 
-              :
-              <>
-                <OdometerContainer values={values} />
-                {show && <Lottie className='lottie' animationData={Celebrate} loop={true} />}
-                {show && <Winner>Winner</Winner>}
-              </>
-            }
-          </>
-        </div>
+            :
+            <>
+              <OdometerContainer values={values} />
+              {show && <Lottie className='lottie' animationData={Celebrate} loop={true} />}
+              {showFirework && <Lottie className='firework' animationData={Firework} loop={true} />}
+              {show && <Winner>Winner</Winner>}
+            </>
+          }
+        </>
       </div>
+    </div>
   );
 }
 

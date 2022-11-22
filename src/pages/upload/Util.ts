@@ -19,7 +19,7 @@ export const getWinningNumber = (mobileData: Array<Array<number>>) => {
 const normalizeData = (json: Array<any>) => {
   let newData: Array<{phone: string}> = [];
   for(let i=0; i<json.length; i++){
-    newData.push({phone: `${json[i].phone}`});
+    newData.push({phone: `${json[i].phone ||  json[i].Phone}`});
   }
   return newData;
 }
