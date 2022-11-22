@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import Odometer from 'react-odometerjs';
 import Lottie from "lottie-react";
 import Celebrate from "../../assets/celebrate.json";
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import styled from "styled-components";
 import CountDown from '../../components/Counter';
 import { useLocation } from 'react-router-dom'
@@ -10,10 +8,6 @@ import OdometerContainer from '../../components/OdometerContainer';
 import { GoBackToHome } from '../upload/Upload';
 
 //Styled component
-const CustomCountDown = styled(CountdownCircleTimer)`
-    display:flex;
-    width: 500px; height: 500px;
-`;
 const Winner = styled.h1`
   position: absolute;
   font-size: 4rem;
@@ -74,7 +68,7 @@ function Lottery() {
             {countDown ?
 
               <CountDown
-                duration={1}
+                duration={10}
                 setCountDown={setCountDown}
               />
 

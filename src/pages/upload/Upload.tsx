@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import chicken from '../../assets/images/chicken.jpg';
+import { CustButoon } from "../welcomepage/WelcomePage";
 //Delete After
 import { getMobileArrayData, getWinningNumber, readUploadFile } from "./Util";
 //Delete After
@@ -65,11 +66,12 @@ const CustInput = styled.input`
     color: rgba(255,255,255, 0.6);
     font-size: 1.1rem;
     width: 300px;
+    border-radius: 5px;
 `;
-const UploadBtn = styled.button`
+const UploadBtn = styled(CustButoon)`
     padding: 5px 10px;
+    border-radius: 5px;
     font-size: 1rem;
-    cursor: pointer;
 `;
 //Styled Componenet
 

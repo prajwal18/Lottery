@@ -17,7 +17,7 @@ align-items:center;
 justify-content:center;
 marginY:'30px'
 `
-const CustButoon = styled.button`
+export const CustButoon = styled.button`
 background-color:#FFD700;
 font-weight:bold;
 display:flex;
@@ -29,7 +29,6 @@ transition-duration:0.2s;
   background-color:#FFFF;
   cursor:pointer;
 }
-
 `
 
 const WelcomePage = () => {
