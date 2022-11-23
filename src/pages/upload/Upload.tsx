@@ -77,7 +77,7 @@ const UploadBtn = styled(CustButoon)`
 
 const Upload = () => {
     const [error, setError] = useState(false);
-    const [mobileData, setMobileData] = useState<Array<{phone: string}>>([]);
+    const [mobileData, setMobileData] = useState<Array<{phone: string, name: string}>>([]);
     const navigate = useNavigate();
 
     const handleUpload = () => {

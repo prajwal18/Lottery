@@ -1,25 +1,29 @@
 import * as xlsx from "xlsx";
 
-export const getMobileArrayData = (mobileData: Array<{phone: string}>) => {
-  let newArray: Array<Array<number>> = [];
+export const getMobileArrayData = (mobileData: Array<{phone: string, name: string}>) => {
+  let newArray: Array<{phone: Array<number>, name: string}> = [];
   for(let i=0; i<mobileData.length; i++){
-      let temp = [];
+      let temp: {phone: Array<number>, name:string} = {
+        phone: [],
+        name: ""
+      };
       for(let j=0; j<mobileData[i].phone.length; j++){
-          temp.push(Number(mobileData[i].phone[j]));
+          temp.phone.push(Number(mobileData[i].phone[j]));
+          temp.name = mobileData[i].name;
       }
       newArray.push(temp);
   }
   return newArray;
 }
 
-export const getWinningNumber = (mobileData: Array<Array<number>>) => {
+export const getWinningNumber = (mobileData: Array<{phone: Array<number>, name: string}>) => {
     return mobileData[(Math.floor(Math.random() * mobileData.length))];
 }
 
 const normalizeData = (json: Array<any>) => {
-  let newData: Array<{phone: string}> = [];
+  let newData: Array<{phone: string, name: string}> = [];
   for(let i=0; i<json.length; i++){
-    newData.push({phone: `${json[i].phone ||  json[i].Phone}`});
+    newData.push({phone: `${json[i].phone ||  json[i].Phone}`, name: `${json[i].name || json[i].Name}`});
   }
   return newData;
 }

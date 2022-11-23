@@ -50,7 +50,7 @@ function Lottery() {
 
   useEffect(() => {
     if (location.state && location.state.allowAccess) {
-      setDesiredNum(location.state.winningNumber);
+      setDesiredNum(location.state.winningNumber.phone);
     }
     if (!countDown) {
       generateWinner();
@@ -73,7 +73,7 @@ function Lottery() {
           {countDown ?
 
             <CountDown
-              duration={10}
+              duration={1}
               setCountDown={setCountDown}
             />
 
@@ -82,7 +82,7 @@ function Lottery() {
               <OdometerContainer values={values} />
               {show && <Lottie className='lottie' animationData={Celebrate} loop={true} />}
               {showFirework && <Lottie className='firework' animationData={Firework} loop={true} />}
-              {show && <Winner>Winner</Winner>}
+              {show && <Winner>Winner: {location.state.winningNumber.name}</Winner>}
             </>
           }
         </>
