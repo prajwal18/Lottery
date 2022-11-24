@@ -77,73 +77,77 @@ const UploadBtn = styled(CustButoon)`
 
 const Upload = () => {
     const [error, setError] = useState(false);
-    const [mobileData, setMobileData] = useState<Array<{phone: string, name: string}>>([]);
+    const [mobileData, setMobileData] = useState<Array<{ phone: string, name: string }>>([]);
+
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleUpload = () => {
         let finalData = getMobileArrayData(mobileData);
-        navigate("/lottery-start", {state: {allowAccess: true, mobileData: finalData}});
+        navigate("/lottery-start", { state: { allowAccess: true, mobileData: finalData } });
     };
 
-    const handleExelFileUpload = (e:any) => {
+    const handleExelFileUpload = (e: any) => {
         readUploadFile(e, setError, setMobileData);
     }
-    const location = useLocation();
-    return(
+
+
+    return (
         <>
             {
-                location.state && location.state.allowAccess?
-                <Container>
-                    <Title>Upload your Excel File</Title>
-                    <p>Valley cold store | Providing excellent service for 41+ years</p>
+                location.state && location.state.allowAccess ?
+                    <Container>
+                        <Title>Upload your Excel File</Title>
+                        <p>Valley cold store | Providing excellent service for 41+ years</p>
 
-                    <CustForm onSubmit={handleUpload}>
-                        <CustInput type="file" onChange={handleExelFileUpload} required accept=".xls,.xlsx"/>
-                        <UploadBtn type="submit">Upload</UploadBtn>
-                    </CustForm>
-                    {
-                        error &&
-                        <p style={{color: "red", fontSize: "2rem"}}>Sorry, can't read exel file</p>
-                    }
-                </Container>  
-                :
-                <GoBackToHome/>
+                        <CustForm onSubmit={handleUpload}>
+                            <CustInput type="file" onChange={handleExelFileUpload} required accept=".xls,.xlsx" />
+                            <UploadBtn type="submit">Upload</UploadBtn>
+                        </CustForm>
+                        {
+                            error &&
+                            <p style={{ color: "red", fontSize: "2rem" }}>Sorry, can't read exel file</p>
+                        }
+                    </Container>
+                    :
+                    <GoBackToHome />
             }
         </>
-        
+
     );
 }
+
 const Proceed = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const handleProceed = () => {
         const winningNumber = getWinningNumber(location.state.mobileData);
-        navigate("/lottery", {state: {allowAccess: true, winningNumber: winningNumber}})
+        navigate("/lottery", { state: { allowAccess: true, winningNumber: winningNumber } })
     };
-    return(
+    return (
         <>
             {
-                location.state && location.state.allowAccess?
-                <Container>
-                    <Title>Start the lottery</Title>
-                    <p>Click the button to start the lottery.</p>
-                    <CustBtn onClick={handleProceed}>start</CustBtn>
-                </Container>  
-                :
-                <GoBackToHome/>
+                location.state && location.state.allowAccess ?
+                    <Container>
+                        <Title>Start the lottery</Title>
+                        <p>Click the button to start the lottery.</p>
+                        <CustBtn onClick={handleProceed}>start</CustBtn>
+                    </Container>
+                    :
+                    <GoBackToHome />
             }
         </>
-        
+
     );
 }
 
 export const GoBackToHome = () => {
-    return(
-        <Container style={{justifyContent:"flex-start", paddingTop: "100px"}}>
-            <p style={{color: "white"}}>Sorry You can't acces this page.</p>
+    return (
+        <Container style={{ justifyContent: "flex-start", paddingTop: "100px" }}>
+            <p style={{ color: "white" }}>Sorry You can't acces this page.</p>
             <CustLink to="/">Go back to Home</CustLink>
         </Container>
     )
 }
 
-export {Upload, Proceed};
+export { Upload, Proceed };
