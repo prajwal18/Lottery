@@ -7,7 +7,7 @@ type OdometerProptype = {
 const OdometerContainer = ({values}: OdometerProptype) => {
     return(
         <>
-            <div className='counter'>
+            <div className='counter' style={{ padding: "20px", background: "rgba(255,255,255,0.5)"}}>
               {
                 values.map((value, index) => (
                   <Odometer
@@ -15,7 +15,6 @@ const OdometerContainer = ({values}: OdometerProptype) => {
                     format="dddd-ddd-ddd"
                     duration={2000}
                     value={value}
-                    // theme="custom"
                   />
                 ))
               }
