@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import photo from '../../assets/images/chicken.jpg'
+import photo from '../../assets/images/christmas.jpg'
 import {BsArrowRightSquareFill} from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom';
 
@@ -38,9 +38,12 @@ const WelcomePage = () => {
   }
   return (
     <Wrapper style={{color:'white'}}>
-      <h2 style={{textAlign:'center' , fontSize:'32px', fontWeight:'normal'}}>Welcome to Valley Cold Store </h2>
-      <h1 style={{fontSize:'84px',margin:'30px 0px '}}>GIVAWAY</h1>
-      <h1 style={{ fontSize:'42px', fontWeight:'normal'}}>41+ Years Of Quality & Freshness </h1>
+      <div style={{textAlign:'center', background: "#000", opacity: "0.7", padding:"20px"}}>
+        <h2 style={{ fontSize:'32px', fontWeight:'normal'}}>Welcome to Fleet Panda </h2>
+        <h1 style={{fontSize:'84px',margin:'30px 0px '}}>Christmas Celebration</h1>
+        <h1 style={{ fontSize:'42px', fontWeight:'normal'}}>Christmas Themed Lottery </h1>
+      </div>
+
       <CustButoon  
       onClick={handleClick}
       style={{padding:' 16px 28px',borderRadius:'5px',border:'none',fontSize:'20px',position:'absolute',bottom:'60px'}}>

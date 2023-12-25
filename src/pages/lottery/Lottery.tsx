@@ -8,12 +8,13 @@ import { GoBackToHome } from '../upload/Upload';
 import Celebrate from "../../assets/celebrate.json";
 import Firework from "../../assets/firework.json";
 import { motion } from "framer-motion";
-//Images
-import AnniversaryImg from "../../assets/images/anniversary.png";
-import ValleyLogoImg from "../../assets/images/valleylogo.png";
-import AirFryImg from "../../assets/images/airFry.png";
-import ProteinImg from "../../assets/images/richProtein.png";
-//Images
+// Images
+import bgImg from "../../assets/images/christmas4.jpg"
+import FleetPandaLogo from "../../assets/images/fleetpanda.svg";
+import GiftImg from "../../assets/images/gifts.png";
+import Gift2Img from "../../assets/images/gift2.png";
+import OwlImg from "../../assets/images/owlImg.png";
+// Images
 
 //Styled component
 const Winner = styled.h1`
@@ -24,26 +25,28 @@ const Winner = styled.h1`
   text-transform: uppercase;
 `;
 
-const AnniversaryImage = styled.img`
+const FleetPandaContainer = styled.img`
   display: block;
   width: 400px;
   height: auto;
 `;
 
-const ImgContainer = styled.div`
+const GiftImgContainer = styled.div`
   position: absolute;
   padding: 10px;
-  right: 150px;
-  bottom: 100px;
-  width: 250px;
-  height: 250px;
-  background: #8a2525;
-  border: 3px dashed white;
-  box-shadow: 0px 0px 50px #8a2525;
-  border-radius: 50%;
-  display: flex;
-  align-items:center;
-  justify-content:center;
+  left: 10px;
+  bottom: 30px;
+  width: 400px;
+  height: 400px;
+`;
+
+const Gift2ImgContainer = styled.div`
+  position: absolute;
+  padding: 10px;
+  right: 10px;
+  bottom: 30px;
+  width: 400px;
+  height: 400px;
 `;
 //Styled component
 
@@ -95,17 +98,17 @@ function Lottery() {
   }
 
   return (
-    <div className='container'>
+    <div className='container' style={{backgroundImage:`url(${bgImg})`, backgroundSize:"cover"}}>
       <>
         {
           countDown ?
-            <CountDown duration={10} setCountDown={setCountDown} />
+            <CountDown duration={1} setCountDown={setCountDown} />
             :
             <>
-              <motion.div className="index" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <AnniversaryImage src={AnniversaryImg} alt="anniversary" />
+              <motion.div className="index" style={{marginTop: "180px", marginBottom:"50px", background:"white", padding:"5px 10px", borderRadius:"2px"}} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <FleetPandaContainer src={FleetPandaLogo} alt="anniversary" />
               </motion.div>
-              <h1 className="index" style={{ fontSize: "3rem", color: "#fcba03" }}>LUCKY DRAW</h1>
+              <h1 className="index" style={{ fontSize: "3rem", color: "#fcba03" }}>X-Mas Lottery</h1>
               <h1 className="index" style={{ fontSize: "2.2rem", color: "#FFFFFF" }}>WINNER ANNOUNCEMENT</h1>
 
               <motion.div className="index" initial={{ scale: 0.5 }} transition={{ duration: 1 }} animate={{
@@ -133,21 +136,26 @@ function Lottery() {
               {
                 show &&
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-                  <img height="200" src={ValleyLogoImg} alt="Valley cold store" style={{ position: "absolute", top: "30px", left: "50px" }} />
-                  <img height="200" src={ProteinImg} alt="Valley cold store" style={{ position: "absolute", top: "30px", right: "50px" }} />
+                  <img height="50" src={FleetPandaLogo} alt="Valley cold store" style={{ position: "absolute", top: "30px", left: "50px", background:"white", padding:"5px 10px", opacity: 0.5 }} />
+                  <img height="200" src={OwlImg} alt="Valley cold store" style={{ position: "absolute", top: "30px", right: "10px" }} />
                 </motion.div>
               }
 
               {
                 show &&
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-                  <ImgContainer>
-                    <img style={{ height: "100%" }} src={AirFryImg} alt="air fryer" />
-                  </ImgContainer>
-                  <p style={{ position: "absolute", fontSize: "1.8rem", bottom: "30px", right: "50px", color: "rgba(255,255,255,0.9)" }}>
-                    <span style={{ color: "rgb(255,255,255)", fontSize: "2.2rem", fontWeight: "700" }}> बनाइन्छ {" "}</span>
-                    Healthy Family
-                  </p>
+                  <GiftImgContainer>
+                    <img style={{ height: "100%" }} src={GiftImg} alt="air fryer" />
+                  </GiftImgContainer>
+                </motion.div>
+              }
+
+              {
+                show &&
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+                  <Gift2ImgContainer>
+                    <img style={{ height: "100%" }} src={Gift2Img} alt="air fryer" />
+                  </Gift2ImgContainer>
                 </motion.div>
               }
             </>

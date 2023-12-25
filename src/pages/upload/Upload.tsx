@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import chicken from '../../assets/images/chicken.jpg';
+import backgroundImg from '../../assets/images/christmas3.jpg';
 import { CustButoon } from "../welcomepage/WelcomePage";
 //Delete After
 import { getMobileArrayData, getWinningNumber, readUploadFile } from "./Util";
@@ -17,7 +17,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     background: linear-gradient(to right, #3489eb, #4fb2e8);
-    background-image:url(${chicken});
+    background-image:url(${backgroundImg});
     background-size:cover;
     color: rgba(255,255,255,0.6);
 `;
@@ -58,6 +58,9 @@ const CustLink = styled(Link)`
 const CustForm = styled.form`
     display: flex; gap: 20px;
     margin-top: 50px; align-items:center;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: black;
     justify-content: center;
 `;
 const CustInput = styled.input`
@@ -98,7 +101,7 @@ const Upload = () => {
                 location.state && location.state.allowAccess ?
                     <Container>
                         <Title>Upload your Excel File</Title>
-                        <p>Valley cold store | Providing excellent service for 41+ years</p>
+                        <p style={{padding:"15px", background:"black", opacity:"0.9", color:"white"}}>Fleet Panda -|- Wishing you a merry Chirstmas and a Happy New Year</p>
 
                         <CustForm onSubmit={handleUpload}>
                             <CustInput type="file" onChange={handleExelFileUpload} required accept=".xls,.xlsx" />
@@ -130,7 +133,9 @@ const Proceed = () => {
                 location.state && location.state.allowAccess ?
                     <Container>
                         <Title>Start the lottery</Title>
-                        <p>Click the button to start the lottery.</p>
+                        <p style={{padding:"15px", background:"black", opacity:"0.9", color:"white"}}>
+                            Click the button to start the lottery.
+                        </p>
                         <CustBtn onClick={handleProceed}>start</CustBtn>
                     </Container>
                     :
