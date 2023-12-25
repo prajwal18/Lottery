@@ -102,7 +102,7 @@ function Lottery() {
       <>
         {
           countDown ?
-            <CountDown duration={1} setCountDown={setCountDown} />
+            <CountDown duration={10} setCountDown={setCountDown} />
             :
             <>
               <motion.div className="index" style={{marginTop: "180px", marginBottom:"50px", background:"white", padding:"5px 10px", borderRadius:"2px"}} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

@@ -13,7 +13,7 @@ const OdometerContainer = ({values}: OdometerProptype) => {
                   <Odometer
                     // key={index}
                     format="dddddddddd"
-                    duration={1000}
+                    duration={2000}
                     value={values.join()}
                   />
                 // ))
